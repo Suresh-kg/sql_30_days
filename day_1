@@ -1,22 +1,10 @@
 🚀 Day 1 – SQL Interview Problem (Real Analytics Thinking)
 
 
-
-Most SQL practice focuses on rows.
-
-But interviews test whether you can think in trends 📈
-
-
-
 Task:
-
 👉 Find drivers whose total rides are strictly increasing month-over-month.
 
-
-
 📊 Sample Data:
-
-
 
 driver_id | ride_id | ride_date | city
 
