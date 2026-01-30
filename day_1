@@ -32,11 +32,7 @@ driver_id | ride_id | ride_date | city
 
 🧠 How Interviewers Expect You to Think
 
-
-
 This is not a simple GROUP BY.
-
-
 
 You need to:
 
@@ -46,11 +42,7 @@ You need to:
 
 ✅ Eliminate drivers with any decrease or no growth
 
-
-
 💡 This is where window functions + validation logic matter.
-
-
 
 ✅ Final Output
 
@@ -58,67 +50,39 @@ driver_id
 
 103
 
-
-
-
-
 Only driver 103 shows a strictly increasing pattern across months.
 
 
-
 🧩 SQL Solution (Interview-Ready)
-
-
 
 SELECT driver_id
 
 FROM (
 
   SELECT
-
     driver_id,
-
     date,
-
     cnt,
-
     CASE
-
       WHEN LAG(cnt) OVER (PARTITION BY driver_id ORDER BY date) IS NULL THEN 0
-
       WHEN cnt <= LAG(cnt) OVER (PARTITION BY driver_id ORDER BY date) THEN 1
-
       ELSE 0
-
     END AS is_bad
-
   FROM (
-
     SELECT
-
       driver_id,
-
       DATE_FORMAT(ride_date, '%Y-%m') AS date,
-
       COUNT(*) AS cnt
-
     FROM rides
-
     GROUP BY driver_id, DATE_FORMAT(ride_date, '%Y-%m')
-
   ) t
-
 ) x
-
 GROUP BY driver_id
-
 HAVING SUM(is_bad) = 0;
 
 
 
 🔥 Why This Is an Interview-Level Problem
-
-
 
 ✔ Uses monthly aggregation
 
