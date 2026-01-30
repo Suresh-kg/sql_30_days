@@ -1,0 +1,163 @@
+🚀 Day 1 – SQL Interview Problem (Real Analytics Thinking)
+
+
+
+Most SQL practice focuses on rows.
+
+But interviews test whether you can think in trends 📈
+
+
+
+Task:
+
+👉 Find drivers whose total rides are strictly increasing month-over-month.
+
+
+
+📊 Sample Data:
+
+
+
+driver_id | ride_id | ride_date | city
+
+101    | 1    | 2024-01-05 | Bangalore
+
+101    | 2    | 2024-01-20 | Bangalore
+
+101    | 3    | 2024-02-10 | Bangalore
+
+101    | 4    | 2024-02-25 | Bangalore
+
+101    | 5    | 2024-03-03 | Bangalore
+
+102    | 6    | 2024-01-07 | Delhi
+
+102    | 7    | 2024-03-12 | Delhi
+
+103    | 8    | 2024-01-15 | Mumbai
+
+103    | 9    | 2024-02-16 | Mumbai
+
+103    | 10   | 2024-02-20 | Mumbai
+
+
+
+🧠 How Interviewers Expect You to Think
+
+
+
+This is not a simple GROUP BY.
+
+
+
+You need to:
+
+✅ Aggregate rides per driver per month
+
+✅ Compare current month vs previous month
+
+✅ Eliminate drivers with any decrease or no growth
+
+
+
+💡 This is where window functions + validation logic matter.
+
+
+
+✅ Final Output
+
+driver_id
+
+103
+
+
+
+
+
+Only driver 103 shows a strictly increasing pattern across months.
+
+
+
+🧩 SQL Solution (Interview-Ready)
+
+
+
+SELECT driver_id
+
+FROM (
+
+  SELECT
+
+    driver_id,
+
+    date,
+
+    cnt,
+
+    CASE
+
+      WHEN LAG(cnt) OVER (PARTITION BY driver_id ORDER BY date) IS NULL THEN 0
+
+      WHEN cnt <= LAG(cnt) OVER (PARTITION BY driver_id ORDER BY date) THEN 1
+
+      ELSE 0
+
+    END AS is_bad
+
+  FROM (
+
+    SELECT
+
+      driver_id,
+
+      DATE_FORMAT(ride_date, '%Y-%m') AS date,
+
+      COUNT(*) AS cnt
+
+    FROM rides
+
+    GROUP BY driver_id, DATE_FORMAT(ride_date, '%Y-%m')
+
+  ) t
+
+) x
+
+GROUP BY driver_id
+
+HAVING SUM(is_bad) = 0;
+
+
+
+🔥 Why This Is an Interview-Level Problem
+
+
+
+✔ Uses monthly aggregation
+
+✔ Requires trend validation
+
+✔ Tests LAG + logical filtering
+
+✔ Mirrors real ride-analytics use cases
+
+
+
+📌 Lesson:
+
+SQL interviews are less about syntax and more about data thinking.
+
+
+
+If you’re preparing for Data Analyst / Data Engineer roles,
+
+practice problems like this — not just basic queries.
+
+
+
+More real SQL interview problems coming 🚀
+
+👇 Drop your solution or approach in comments
+
+
+
+#SQL #DataAnalytics #DataEngineering #InterviewPrep #WindowFunctions #LinkedInTech #30DaysOfSQL
