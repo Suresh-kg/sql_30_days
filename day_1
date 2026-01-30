@@ -97,19 +97,3 @@ HAVING SUM(is_bad) = 0;
 📌 Lesson:
 
 SQL interviews are less about syntax and more about data thinking.
-
-
-
-If you’re preparing for Data Analyst / Data Engineer roles,
-
-practice problems like this — not just basic queries.
-
-
-
-More real SQL interview problems coming 🚀
-
-👇 Drop your solution or approach in comments
-
-
-
-#SQL #DataAnalytics #DataEngineering #InterviewPrep #WindowFunctions #LinkedInTech #30DaysOfSQL
