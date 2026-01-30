@@ -1,0 +1,67 @@
+
+🚀 Day 2 – SQL Interview Problem (User Behavior Analytics)
+
+🎯 Interview Question
+
+Task:
+👉 Find users whose 2nd order was placed within 7 days of their 1st order.
+
+📊 Sample Data:
+
+order_id | user_id | order_date | restaurant_id | amount
+1        | 201     | 2024-01-01 | 501           | 250
+2        | 201     | 2024-01-05 | 502           | 300
+3        | 201     | 2024-01-20 | 503           | 150
+4        | 202     | 2024-02-10 | 504           | 400
+5        | 203     | 2024-03-01 | 501           | 200
+6        | 203     | 2024-03-03 | 502           | 220
+7        | 204     | 2024-01-15 | 503           | 180
+8        | 204     | 2024-01-30 | 504           | 260
+9        | 205     | 2024-02-01 | 501           | 500
+
+🧠 How Interviewers Expect You to Think
+
+This problem tests retention & engagement analysis.
+
+You need to:
+✅ Identify the 1st and 2nd order per user
+✅ Compare their order dates
+✅ Check if the gap is ≤ 7 days
+
+💡 The cleanest way?
+👉 ROW_NUMBER() + LAG()
+
+🧩 SQL Solution (Interview-Ready)
+  
+SELECT user_id
+FROM (
+    SELECT
+        user_id,
+        order_date,
+        ROW_NUMBER() OVER (
+            PARTITION BY user_id
+            ORDER BY order_date
+        ) AS rn,
+        LAG(order_date) OVER (
+            PARTITION BY user_id
+            ORDER BY order_date
+        ) AS prev_order_date
+    FROM orders
+) t
+WHERE rn = 2
+  AND order_date - prev_order_date <= 7;
+
+✅ Why This Query Works
+
+✔ Ensures we only check the 2nd order
+✔ Correctly compares with the 1st order
+✔ Avoids extra joins or subqueries
+✔ Reflects real product analytics logic
+
+📌 Interview Insight:
+  
+Companies use this exact logic to measure:
+Early user retention
+Repeat purchase behavior
+Activation success
+  
