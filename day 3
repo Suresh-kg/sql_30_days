@@ -1,0 +1,47 @@
+
+Day 3 – PayPal SQL Interview Problem (Advanced)
+In fintech interviews, SQL isn’t about totals.
+ It’s about patterns, sequences, and intent 💳⚠️
+📌 Business Problem
+PayPal wants to identify users who had:
+👉 A FAILED transaction immediately followed by a SUCCESS transaction
+This pattern helps teams:
+Detect payment retries
+Analyze checkout friction
+Flag UX or fraud-related issues
+
+🎯 Interview Question
+" Find users where a FAILED transaction is immediately followed by a SUCCESS transaction. "
+
+🔍 Interview Constraints (Very Important)
+“Immediately” = next transaction in time
+Order strictly by txn_date
+Ignore users with only one transaction
+Output user_id only
+Each user appears once
+🧠 How Interviewers Expect You to Think
+This is sequence analysis, not aggregation.
+You must:
+ ✅ Preserve transaction order
+ ✅ Compare current row with the previous row
+ ✅ Detect a FAILED → SUCCESS pattern
+💡 Best tool here: window functions
+
+✅ Why This Solution Is Strong
+✔ Uses LAG() for row-to-row comparison
+ ✔ Respects transaction order
+ ✔ Detects exact sequence, not just existence
+ ✔ Clean, readable, and interview-safe
+
+📌 Interview Insight:
+ This exact logic is used in:
+Payment retry analysis
+Funnel drop-off detection
+Fraud & anomaly pipelines
+If you’re comfortable with sequence-based SQL,
+ you’re operating at a senior analytics / data engineer level.
+More real interview SQL problems coming 🚀
+
+ 👇 Drop your alternative solution (LEAD, self-join?) in comments
+hashtag#SQL hashtag#PayPal hashtag#DataAnalytics hashtag#DataEngineering
+ hashtag#WindowFunctions hashtag#FinTech hashtag#InterviewPrep hashtag#30DaysOfSQL
