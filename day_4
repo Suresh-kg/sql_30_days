@@ -1,0 +1,91 @@
+
+##DAY- 4
+🚀 SQL Interview Problem – Top-N per Category (Must-Know)
+
+This is one of the most frequently asked SQL interview questions
+for Data Analyst & Data Engineer roles.
+
+🎯 Interview Question
+
+Find the top 2 products per category by total revenue.
+
+📌 Revenue = quantity × price
+
+🧠 How Interviewers Expect You to Think
+
+This problem tests:
+
+✅ Aggregation logic
+✅ CTE
+✅ Window functions
+✅ Ranking within groups
+
+The correct approach is 2-step thinking:
+1️⃣ Aggregate revenue at (category, product) level
+2️⃣ Rank products within each category
+
+🧩 SQL Solution (Interview-Ready)
+WITH t AS (
+    SELECT
+        category,
+        product_id,
+        SUM(quantity * price) AS total_revenue
+    FROM orders
+    GROUP BY category, product_id
+),
+ranked AS (
+    SELECT
+        category,
+        product_id,
+        total_revenue,
+        ROW_NUMBER() OVER (
+            PARTITION BY category
+            ORDER BY total_revenue DESC
+        ) AS rn
+    FROM t
+)
+SELECT
+    category,
+    product_id,
+    total_revenue
+FROM ranked
+WHERE rn <= 2
+ORDER BY total_revenue DESC;
+
+⚠️ Important Interview Insight
+
+👉 This solution uses ROW_NUMBER(), which:
+
+Returns exactly 2 products per category
+
+Breaks ties arbitrarily if revenues are equal
+
+💡 For more efficient and business-accurate outcomes,
+you can use DENSE_RANK() instead.
+
+Why?
+
+DENSE_RANK() handles ties correctly
+
+Returns all top performers, not forced limits
+
+📌 Example:
+If 3 products share the same top revenue,
+ROW_NUMBER() → 2 products
+DENSE_RANK() → all 3 products
+
+Interviewers LOVE when you mention this 👌
+
+✅ What This Question Really Tests
+
+Do you understand ranking vs grouping?
+Can you handle real business edge cases?
+Do you know when to choose ROW_NUMBER vs DENSE_RANK?
+
+If yes → you’re interview-ready 🚀
+
+More real SQL interview problems coming soon.
+👇 Drop your alternative approach in comments
+
+#SQL #DataAnalytics #DataEngineering
+#InterviewPrep #WindowFunctions #TopN #30DaysOfSQL
