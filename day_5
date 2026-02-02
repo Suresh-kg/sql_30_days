@@ -1,0 +1,61 @@
+
+##DAY -5
+
+🚀 SQL Interview Problem – Daily Active Users (Netflix-Style Analytics)
+
+DAU looks simple on paper…
+but interviews test how precisely you define “active” 📊
+
+🎯 Interview Problem
+
+You’re given a user_activity table with user actions by date.
+
+Task:
+👉 Calculate Daily Active Users (DAU)
+👉 Then compute the rolling 7-day average of DAU
+
+📌 Strict Business Rules (Very Important)
+
+A user is active if they appear at least once per day
+Count distinct users per day
+Rolling window = current day + previous 6 days
+
+Output:
+
+activity_date
+daily_active_users
+rolling_7_day_avg
+
+🧠 How Interviewers Expect You to Think
+
+This problem is not about writing a long query.
+It tests whether you can:
+Clearly define DAU
+Avoid double-counting users
+Apply a time-based rolling window
+Separate daily aggregation from trend analysis
+
+💡 The key insight:
+
+First calculate DAU per day,
+then apply a 7-day rolling average on top of it.
+
+📊 Why This Matters in Real Products
+
+Streaming and consumer apps use this exact logic to:
+Track engagement trends
+Smooth daily fluctuations
+Measure product health over time
+
+If you understand this well,
+you’re thinking like a product data analyst, not just writing SQL.
+
+📌 Interview Tip:
+Most candidates jump straight to the rolling window.
+Strong candidates define DAU correctly first.
+
+More real-world SQL interview problems coming 🚀
+👇 How would you define “active user” in your product?
+
+#SQL #DataAnalytics #ProductAnalytics
+#InterviewPrep #DAU #WindowFunctions #30DaysOfSQL
