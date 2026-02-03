@@ -1,0 +1,53 @@
+
+## Day- 6
+
+🎯 Interview Problem
+Find users who placed orders on at least 3 consecutive days.
+
+Strict rules:
+
+Consecutive = calendar days
+Use order_date (not order_id)
+Output only user_id
+Each user appears once
+
+👉 Write the SQL query.
+
+🧩 SQL Solution
+WITH t AS (
+    SELECT
+        user_id,
+        order_date,
+        ROW_NUMBER() OVER (
+            PARTITION BY user_id
+            ORDER BY order_date
+        ) AS rn
+    FROM orders
+),
+grp AS (
+    SELECT
+        user_id,
+        order_date,
+        order_date - rn AS grp_id
+    FROM t
+)
+SELECT DISTINCT user_id
+FROM grp
+GROUP BY user_id, grp_id
+HAVING COUNT(*) >= 3;
+
+📌 Interview Insight
+
+This problem tests:
+Pattern recognition
+Date arithmetic
+Grouping consecutive records
+
+If you know why order_date - row_number() works,
+you’re already ahead of most candidates.
+
+More real interview-style SQL problems coming 🚀
+👇 Would you solve this differently?
+
+#SQL #Flipkart #DataAnalytics #DataEngineering
+#InterviewPrep #ConsecutiveDays #WindowFunctions #30DaysOfSQL
