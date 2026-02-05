@@ -1,0 +1,62 @@
+🚀 Day 8 – Uber SQL Interview (Advanced+)
+
+This is where most candidates slip.
+Not because SQL is hard —
+but because date logic is unforgiving 😈
+
+📌 Business Problem
+
+Uber wants to identify drivers who were inactive for exactly 7 consecutive days and then became active again.
+
+Used for:
+
+Churn & reactivation analysis
+
+Incentive targeting
+
+Driver lifecycle modeling
+
+🎯 Interview Question
+
+Find drivers who had a gap of exactly 7 inactive days between two consecutive rides.
+
+🔒 Strict Rules (Non-Negotiable)
+
+Compare consecutive rides only
+
+Use ride_date (not ride_id)
+
+“Exactly 7 inactive days” means:
+
+next_ride_date − current_ride_date − 1 = 7
+
+
+👉 Which translates to a date difference of 8 days
+
+Output only driver_id
+
+Each driver appears once
+
+
+📌 Why This Is an Advanced Question
+
+Tests LEAD / LAG on real timelines
+
+Exposes off-by-one errors
+
+Forces you to think in inactive days, not date gaps
+
+Mimics real churn reactivation logic
+
+Most wrong answers use = 7.
+Correct answers understand why it’s 8.
+
+That’s the difference between:
+❌ “knows SQL”
+✅ “thinks like an analytics engineer”
+
+More end-round SQL problems coming 🔥
+👇 Would you catch the off-by-one trap?
+
+#SQL #Uber #DataAnalytics #DataEngineering
+#InterviewPrep #AdvancedSQL #WindowFunctions #ChurnAnalysis #30DaysOfSQL
