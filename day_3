@@ -8,7 +8,7 @@ PayPal wants to identify users who had:
 This pattern helps teams:
 Detect payment retries
 Analyze checkout friction
-Flag UX or fraud-related issues
+Flag UX or fraud-related issues.
 
 🎯 Interview Question
 " Find users where a FAILED transaction is immediately followed by a SUCCESS transaction. "
