@@ -81,7 +81,6 @@ GROUP BY driver_id
 HAVING SUM(is_bad) = 0;
 
 
-
 🔥 Why This Is an Interview-Level Problem
 
 ✔ Uses monthly aggregation
@@ -91,8 +90,6 @@ HAVING SUM(is_bad) = 0;
 ✔ Tests LAG + logical filtering
 
 ✔ Mirrors real ride-analytics use cases
-
-
 
 📌 Lesson:
 
