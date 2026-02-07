@@ -1,0 +1,95 @@
+🚀 Day 9 – Zomato SQL Interview (Retention Logic – Advanced)
+
+Retention questions don’t fail candidates because of SQL syntax.
+They fail candidates because of definition mistakes 📉
+
+📌 Business Problem
+
+Zomato wants to measure restaurant retention month-over-month.
+
+A restaurant is retained in month M if:
+
+It received ≥ 1 order in month M
+
+AND ≥ 1 order in month M−1
+
+🎯 Interview Task
+
+Calculate month-wise retained restaurant count.
+
+🔒 Strict Rules (Interview-Traps Included 😈)
+
+Retention is checked only between consecutive months
+
+Ignore the first month (no previous data)
+
+Handle missing months correctly
+
+Output:
+
+month
+
+retained_restaurant_count
+
+🧩 SQL Solution (Interview-Ready)
+WITH monthly_orders AS (
+    SELECT DISTINCT
+        restaurant_id,
+        DATE_FORMAT(order_date, '%Y-%m') AS ym
+    FROM orders
+),
+retention_flag AS (
+    SELECT
+        restaurant_id,
+        ym,
+        LAG(ym) OVER (
+            PARTITION BY restaurant_id
+            ORDER BY ym
+        ) AS prev_ym
+    FROM monthly_orders
+)
+SELECT
+    ym AS month,
+    COUNT(DISTINCT restaurant_id) AS retained_restaurant_count
+FROM retention_flag
+WHERE TIMESTAMPDIFF(
+          MONTH,
+          STR_TO_DATE(prev_ym, '%Y-%m'),
+          STR_TO_DATE(ym, '%Y-%m')
+      ) = 1
+GROUP BY ym
+ORDER BY ym;
+
+📌 Why This Is Advanced
+
+Monthly aggregation before retention logic
+
+Correct use of LAG() (not naive self-joins)
+
+Explicit handling of missing months
+
+Filters only true MoM retention
+
+Many candidates:
+❌ Compare any two months
+❌ Miss gaps
+❌ Overcount retained restaurants
+
+This solution avoids all three.
+
+Retention logic like this is used in:
+
+Marketplace health metrics
+
+Seller lifecycle tracking
+
+Growth & churn dashboards
+
+If you can reason through this calmly,
+you’re thinking like a senior analytics / data engineer.
+
+Day 10 will be harder 🔥
+👇 Would you solve this using a self-join instead?
+
+#SQL #Zomato #DataAnalytics #DataEngineering
+#InterviewPrep #RetentionAnalysis #WindowFunctions #AdvancedSQL #30DaysOfSQL
