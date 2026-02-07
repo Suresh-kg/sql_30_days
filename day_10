@@ -1,0 +1,63 @@
+
+🚀 **Day 10 – PayPal SQL Interview (Fun + Smart)**
+
+Not every interview question is about window functions.
+Some are about **thinking clearly under simple rules** 🧠✨
+
+---
+
+## 📌 Business Problem
+
+PayPal wants to flag **suspicious users**.
+
+A user is considered suspicious if:
+
+* They made **3 or more transactions in a single day**
+* AND the **total transaction amount that day > 10,000**
+
+---
+
+## 🎯 Interview Task
+
+**Find suspicious users and the date they were suspicious.**
+
+**Output:**
+
+* `user_id`
+* `txn_date`
+* `txn_count`
+* `total_amount`
+
+## 🧩 SQL Solution (Clean & Interview-Safe)
+
+## 🧠 Why Interviewers Like This Question
+
+* No fancy tricks
+* No overengineering
+* Just **correct grouping + clear conditions**
+
+Many candidates:
+❌ Jump to window functions
+❌ Overthink the logic
+
+Strong candidates:
+✅ Read the problem carefully
+✅ Aggregate at the right level
+✅ Use `HAVING` correctly
+
+---
+
+📌 **Interview Insight:**
+This exact pattern is used in:
+
+* Fraud detection
+* Risk monitoring
+* Compliance dashboards
+
+Sometimes the best SQL answer is the **simplest one**.
+
+That’s **10 days done** — consistency > intensity 💙
+👇 How would *you* extend this for real fraud systems?
+
+#SQL #PayPal #DataAnalytics #DataEngineering
+#InterviewPrep #FraudDetection #Aggregation #30DaysOfSQL
