@@ -1,0 +1,34 @@
+
+🚀 **Day 11 – Meta SQL Interview (User Engagement)**
+
+## 📌 Business Problem
+Meta wants to identify **highly engaged users**.
+
+A user is considered **highly engaged** if:
+* They were active for **at least 5 consecutive calendar days**
+
+Used for:
+
+* Retention analysis
+* Power-user detection
+* Notification targeting
+
+## 🎯 Interview Task
+
+**Find users who were active for at least 5 consecutive days.**
+
+## 🔒 Rules (Meta-Style Precision)
+
+* Consecutive = **calendar days**
+* Multiple activities on the same day count as **one**
+* Use `activity_date`
+* Output only `user_id`
+* Each user appears once
+
+  ## 📌 Why This Is a Strong Interview Answer
+
+* Correctly **deduplicates daily activity**
+* Uses **gaps & islands** for streak detection
+* Avoids overcounting
+* Scales cleanly to real engagement data
+
