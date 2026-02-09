@@ -1,0 +1,54 @@
+
+🚀 Day 12 – Google SQL Interview (Funnel Logic)
+
+Sometimes interviews test clarity, not complexity.
+
+📌 Business Problem
+
+Analyze a user event funnel:
+
+view → click → purchase
+
+A user is considered **converted** if they:
+
+* Completed the steps in this **exact order**
+* Dates are **increasing**
+* Extra events in between are allowed
+
+🎯 Interview Task
+
+Find users who successfully completed the funnel.
+
+🧩 SQL Solution (Simple & Interview-Safe)
+
+WITH t AS (
+    SELECT 
+        user_id,
+        event_date,
+        CASE
+            WHEN event_type = 'view' THEN 1
+            WHEN event_type = 'click' THEN 2
+            WHEN event_type = 'purchase' THEN 3
+        END AS event
+    FROM user_events
+)
+SELECT user_id
+FROM t
+GROUP BY user_id
+HAVING
+    MIN(CASE WHEN event = 1 THEN event_date END)
+  < MIN(CASE WHEN event = 2 THEN event_date END)
+AND
+    MIN(CASE WHEN event = 2 THEN event_date END)
+  < MIN(CASE WHEN event = 3 THEN event_date END);
+
+📌 Why Interviewers Like This
+
+* No streaks, no tricks
+* Clear sequence validation
+* Easy to explain, hard to get wrong
+
+Good SQL is often just clean logic.
+
+We’ll change formats again next 😄
+#SQL #Google #DataAnalytics #FunnelAnalysis #InterviewPrep
