@@ -1,0 +1,40 @@
+🚀 Day 13 – Amazon SQL Interview (Price Drop Detection)
+Not every analytics problem is about growth.
+Sometimes it’s about catching the drop 📉
+📌 Business Problem
+Identify price drops for products.
+Rule:
+Show only cases where the current price is lower than the previous price
+(Compare consecutive price changes only).
+
+✅ Expected Output
+Only rows with actual price decreases appear.
+Increases or no-change rows are ignored.
+🧩 SQL Solution (Simple & Interview-Ready)
+WITH t AS (
+    SELECT 
+        product_id,
+        price_date,
+        price,
+        LAG(price) OVER (
+            PARTITION BY product_id
+            ORDER BY price_date
+        ) AS previous_price
+    FROM product_prices
+)
+SELECT 
+    product_id,
+    price_date,
+    previous_price,
+    price AS current_price
+FROM t
+WHERE price < previous_price;
+
+📌 Why Interviewers Like This
+•	Clear use of LAG()
+•	Correct consecutive comparison
+•	No overengineering
+•	Easy to explain in one minute
+Price tracking, alerts, and trend monitoring all start with logic like this.
+Ready for Day 14 😄
+#SQL #Amazon #DataAnalytics #InterviewPrep #WindowFunctions #30DaysOfSQL
