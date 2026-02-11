@@ -1,0 +1,52 @@
+🚀 Day 14 – Microsoft SQL Interview (Latest Status Problem)
+This question looks easy.
+But it appears in many real Data Engineer interviews.
+
+📌 Business Problem
+Users can change subscription status over time.
+We need to answer:
+What is the current (latest) status of each user?
+
+🎯 Interview Task
+Return:
+•	user_id
+•	latest_status
+•	status_date
+Rules:
+•	Use status_date to determine the latest record
+•	One row per user
+•	Must scale for many status changes
+
+🧩 SQL Solution (Clean & Scalable)
+WITH t AS (
+    SELECT 
+        user_id,
+        status,
+        status_date,
+        ROW_NUMBER() OVER (
+            PARTITION BY user_id
+            ORDER BY status_date DESC
+        ) AS rn
+    FROM user_status
+)
+SELECT 
+    user_id,
+    status AS latest_status,
+    status_date
+FROM t
+WHERE rn = 1;
+
+📌 Why This Is a Strong Interview Answer
+•	Uses proper partitioning
+•	Correctly orders by latest date
+•	Returns exactly one row per user
+•	Clean, readable, production-safe
+This pattern is everywhere:
+•	Subscription systems
+•	Account state tracking
+•	Order status pipelines
+Sometimes strong SQL is just about getting the latest truth correctly.
+
+Ready for Day 15 😄
+#SQL #Microsoft #DataEngineering #InterviewPrep #WindowFunctions #30DaysOfSQL
+
