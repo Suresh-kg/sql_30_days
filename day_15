@@ -1,26 +1,25 @@
 
-🚀 **Day 15 – Netflix SQL Interview (Churn Detection)**
+🚀 Day 15 – Netflix SQL Interview (Churn Detection)**
 
 Now we move beyond syntax.
-This is **product analytics thinking + SQL**.
+This is product analytics thinking + SQL.
 
 
 📌 Business Problem
 
-Netflix wants to identify **churned users**.
+Netflix wants to identify churned users.
 
 A user is considered churned if:
 
 * They were active before
-* BUT have had **no activity in the last 30 days**
+* BUT have had no activity in the last 30 days
 
-Assume today = **2024-02-15**
+Assume today = 2024-02-15
 
-So any user whose last activity date is before **2024-01-16** is churned.
+So any user whose last activity date is before 2024-01-16 is churned.
 
----
 
-## 🎯 Interview Task
+🎯 Interview Task
 
 Find:
 
@@ -29,9 +28,8 @@ Find:
 
 Only churned users.
 
----
 
-## 🧩 SQL Solution (Clean & Scalable)
+🧩 SQL Solution (Clean & Scalable)
 
 ```sql
 SELECT
@@ -40,11 +38,8 @@ SELECT
 FROM user_activity
 GROUP BY user_id
 HAVING MAX(activity_date) < '2024-01-16';
-```
 
----
-
-## 🧠 Why This Is a Senior-Level Question
+🧠 Why This Is a Senior-Level Question
 
 This isn’t about window functions.
 
@@ -62,16 +57,3 @@ Strong candidates ask:
 
 Sometimes the simplest query is the most powerful.
 
----
-
-Churn logic like this powers:
-
-* Retention dashboards
-* Re-engagement campaigns
-* Revenue forecasting
-
-SQL becomes powerful when you think in **business terms first**.
-
-Day 16 soon 👀🔥
-
-#SQL #Netflix #DataAnalytics #ChurnAnalysis #ProductAnalytics #InterviewPrep #30DaysOfSQL
