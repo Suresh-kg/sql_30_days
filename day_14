@@ -41,6 +41,7 @@ WHERE rn = 1;
 •	Correctly orders by latest date
 •	Returns exactly one row per user
 •	Clean, readable, production-safe
+
 This pattern is everywhere:
 •	Subscription systems
 •	Account state tracking
