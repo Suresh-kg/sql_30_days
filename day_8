@@ -23,13 +23,10 @@ Find drivers who had a gap of exactly 7 inactive days between two consecutive ri
 🔒 Strict Rules (Non-Negotiable)
 
 Compare consecutive rides only
-
 Use ride_date (not ride_id)
 
 “Exactly 7 inactive days” means:
-
 next_ride_date − current_ride_date − 1 = 7
-
 
 👉 Which translates to a date difference of 8 days
 
